@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>局长“破圈”：流量助文旅</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+        body {
+            background-color: #f8f5f0;
+            overflow: hidden;
+            height: 100vh;
+        }
+        .page {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            flex-direction: column;
+            padding: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+        .page.active {
+            display: flex;
+        }
+
+        /* 首页背景：稻田风光 */
+        .page1 {
+            background-image: url("https://cdn.pixabay.com/photo/2020/08/31/10/52/rice-field-5530707_1280.jpg");
+            background-blend-mode: overlay;
+            background-color: rgba(255,255,255,0.8);
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #8B4513;
+            text-align: center;
+            margin-top: 100px;
+            animation: fadeInUp 1s ease;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #5a3e2b;
+            text-align: center;
+            margin: 20px 0;
+            animation: fadeInUp 1.5s ease;
+        }
+        .btn {
+            width: 180px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: #D2691E;
+            color: white;
+            border-radius: 25px;
+            margin: 0 auto;
+            margin-top: 50px;
+            cursor: pointer;
+            animation: bounceIn 2s infinite alternate;
+        }
+
+        /* 统一内容区样式 */
+        .page-title {
+            font-size: 24px;
+            color: #8B4513;
+            border-bottom: 2px solid #DEB887;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            animation: slideInDown 0.8s ease;
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease;
+        }
+        .content-img {
+            width: 45%;
+            margin: 10px;
+            border-radius: 10px;
+            animation: zoomIn 1s ease;
+        }
+        .content-text {
+            width: 45%;
+            margin: 10px;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+            animation: slideInRight 1s ease;
+        }
+
+        .vote-option {
+            margin: 15px 0;
+            padding: 10px;
+            border: 2px solid #DEB887;
+            border-radius: 8px;
+            cursor: pointer;
+            animation: fadeInUp 1s ease;
+        }
+        .vote-option:hover {
+            background-color: #fff8dc;
+        }
+        .submit-btn {
+            width: 150px;
+            height: 45px;
+            line-height: 45px;
+            background-color: #8B4513;
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            margin: 20px auto;
+            cursor: pointer;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        .page10 {
+            background-image: url("https://cdn.pixabay.com/photo/2016/11/29/05/08/architecture-1869219_1280.jpg");
+            background-blend-mode: overlay;
+            background-color: rgba(255,255,255,0.8);
+        }
+
+        .share-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            animation: fadeInUp 1s ease;
+        }
+        .share-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 15px;
+            cursor: pointer;
+            animation: rotateIn 1.5s ease;
+        }
+
+        .nav {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .prev-btn, .next-btn {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #D2691E;
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <source src="https://music.163.com/song/media/outer/url?id=1395421107.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="clickSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 第1页 -->
+    <div class="page page1 active" id="page1">
+        <div class="title">局长“破圈”：流量助文旅</div>
+        <div class="subtitle">解锁文旅产业新路径</div>
+        <div class="btn" onclick="nextPage()">点击开启探索之旅</div>
+    </div>
+
+    <!-- 第2页：代言出圈 -->
+    <div class="page page2" id="page2">
+        <div class="page-title">出圈热潮·花式代言</div>
+        <div class="content">
+            <img src="https://cdn.pixabay.com/photo/2017/02/15/11/17/people-2060278_1280.jpg" class="content-img">
+            <div class="content-text">各地文旅局长走出办公室，用创意为家乡代言，收获海量流量～</div>
+        </div>
+        <div class="nav">
+            <div class="prev-btn" onclick="prevPage()">←</div>
+            <div class="next-btn" onclick="nextPage()">→</div>
+        </div>
+    </div>
+
+    <!-- 第3页：网友热议 -->
+    <div class="page page3" id="page3">
+        <div class="page-title">网友热议·情感共鸣</div>
+        <div class="content">
+            <div class="content-text">“东北大米香！为真诚代言点赞～”<br><br>“跨区域合作太赞，想打卡两地！”</div>
+            <img src="https://cdn.pixabay.com/photo/2017/08/06/23/03/smartphone-2593697_1280.jpg" class="content-img">
+        </div>
+        <div class="nav">
+            <div class="prev-btn" onclick="prevPage()">←</div>
+            <div class="next-btn" onclick="nextPage()">→</div>
+        </div>
+    </div>
+
+    <!-- 第4页：案例1 -->
+    <div class="page page4" id="page4">
+        <div class="page-title">案例1·稻田里的流量密码</div>
+        <div class="content">
+            <img src="https://cdn.pixabay.com/photo/2022/05/26/10/37/rice-field-7218033_1280.jpg" class="content-img">
+            <div class="content-text">多语言推介蟹田稻，20万+公斤订单直达全国～</div>
+        </div>
+        <div class="nav">
+            <div class="prev-btn" onclick="prevPage()">←</div>
+            <div class="next-btn" onclick="nextPage()">→</div>
+        </div>
+    </div>
+
+    <!-- 第5页：晋浙合作 -->
+    <div class="page page5" id="page5">
+        <div class="page-title">案例2·千里携手促融合</div>
+        <div class="content">
+            <div class="content-text">南北文旅联动，探索“文化+旅游+产业”新路径～</div>
+            <img src="https://cdn.pixabay.com/photo/2018/03/13/12/34/handshake-3224527_1280.jpg" class="content-img">
+        </div>
+        <div class="nav">
+            <div class="prev-btn" onclick="prevPage()">←</div>
+            <div class="next-btn" onclick="nextPage()">→</div>
+        </div>
+    </div>
+
+    <!-- 第6页：启示 -->
+    <div class="page page6" id="page6">
+        <div class="page-title">案例启示·流量变动能</div>
+        <div class="content">
+            <img src="https://cdn.pixabay.com/photo/2016/11/23/15/39/infographic-1850148_1280.png" class="content-img">
+            <div class="content-text">真诚+特色=流量密码，产业配套=长效关键～</div>
+        </div>
+        <div class="nav">
+            <div class="prev-btn" onclick="prevPage()">←</div>
+            <div class="next-btn" onclick="nextPage()">→</div>
+        </div>
+    </div>
+
+    <!-- 第7页：长效之道 -->
+    <div class="page page7" id="page7">
+        <div class="page-title">长效之道·留住流量</div>
+        <div class="content">
+            <div class="content-text">完善配套+优质服务，让“头回客”变“回头客”～</div>
+            <img src="https://cdn.pixabay.com/photo/2016/10/10/11/47/coffee-1724079_1280.jpg" class="content-img">
+        </div>
+        <div class="nav">
+            <div class="prev-btn" onclick="prevPage()">←</div>
+            <div class="next-btn" onclick="nextPage()">→</div>
+        </div>
+    </div>
+
+    <!-- 第8页：理性思考 -->
+    <div class="page page8" id="page8">
+        <div class="page-title">理性思考·拒绝跟风</div>
+        <div class="content">
+            <img src="https://cdn.pixabay.com/photo/2017/02/12/01/35/think-2056021_1280.jpg" class="content-img">
+            <div class="content-text">立足本土特色，挖掘独特资源，方能行稳致远～</div>
+        </div>
+        <div class="nav">
+            <div class="prev-btn" onclick="prevPage()">←</div>
+            <div class="next-btn" onclick="nextPage()">→</div>
+        </div>
+    </div>
+
+    <!-- 第9页：投票 -->
+    <div class="page page9" id="page9">
+        <div class="page-title">互动投票·为文旅献策</div>
+        <div class="content" style="flex-direction: column;">
+            <div class="vote-option">1. 真诚态度</div>
+            <div class="vote-option">2. 创意形式</div>
+            <div class="vote-option">3. 产业配套</div>
+            <div class="submit-btn" onclick="showResult()">提交投票</div>
+        </div>
+        <div class="nav">
+            <div class="prev-btn" onclick="prevPage()">←</div>
+            <div class="next-btn" onclick="nextPage()">→</div>
+        </div>
+    </div>
+
+    <!-- 尾页 -->
+    <div class="page page10" id="page10">
+        <div class="page-title">总结展望</div>
+        <div class="content-text" style="text-align: center; margin-top: 50px; font-size: 18px;">
+            流量为桥，产业为基，共赴文旅振兴新征程～
+        </div>
+
+        <div class="share-icons">
+            <img src="https://cdn.pixabay.com/photo/2017/01/31/14/44/wechat-2022421_1280.png" class="share-icon">
+            <img src="https://cdn.pixabay.com/photo/2017/01/31/14/44/wechat-2022422_1280.png" class="share-icon">
+            <img src="https://cdn.pixabay.com/photo/2013/07/12/16/29/weibo-150035_1280.png" class="share-icon">
+        </div>
+
+        <div class="nav">
+            <div class="prev-btn" onclick="prevPage()">←</div>
+            <div class="next-btn" onclick="goHome()">首页</div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 10;
+
+        const bgMusic = document.getElementById('bgMusic');
+        const clickSound = document.getElementById('clickSound');
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            bgMusic.play().catch(err => {});
+        });
+
+        function playClickSound() {
+            clickSound.currentTime = 0;
+            clickSound.play().catch(err => {});
+        }
+
+        function nextPage() {
+            playClickSound();
+            if (currentPage < totalPages) {
+                document.getElementById(`page${currentPage}`).classList.remove('active');
+                currentPage++;
+                document.getElementById(`page${currentPage}`).classList.add('active');
+            }
+        }
+
+        function prevPage() {
+            playClickSound();
+            if (currentPage > 1) {
+                document.getElementById(`page${currentPage}`).classList.remove('active');
+                currentPage--;
+                document.getElementById(`page${currentPage}`).classList.add('active');
+            }
+        }
+
+        function goHome() {
+            playClickSound();
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            currentPage = 1;
+            document.getElementById(`page${currentPage}`).classList.add('active');
+        }
+
+        function showResult() {
+            playClickSound();
+            alert('投票成功！结果：产业配套占比最高～');
+        }
+
+        const contentImgs = document.querySelectorAll('.content-img');
+        contentImgs.forEach(img => {
+            img.addEventListener('click', () => {
+                playClickSound();
+                alert('图片详情：文旅局长创新推介实景图');
+            });
+        });
+
+        const voteOptions = document.querySelectorAll('.vote-option');
+        voteOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                playClickSound();
+                voteOptions.forEach(opt => opt.style.backgroundColor = '');
+                option.style.backgroundColor = '#fff8dc';
+            });
+        });
+
+        const shareIcons = document.querySelectorAll('.share-icon');
+        shareIcons.forEach(icon => {
+            icon.addEventListener('click', () => {
+                playClickSound();
+                alert('分享成功！感谢你的支持～');
+            });
+        });
+    </script>
+
+</body>
+</html>
